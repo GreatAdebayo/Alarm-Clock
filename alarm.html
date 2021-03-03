@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width", initial-scale="1.0">
+<link rel="stylesheet" type="text/css" href="alarm.css">
+	<title>alarm</title>
+</head>
+
+<body onload="startTime()">
+
+	<span id="alarm">ALARM</span>
+
+<div id="conta1">
+
+
+	<div id="conta2">
+		<div id="cont3"> 
+
+			<input class="inp2" placeholder="H" type="number" id="hour">
+
+		<span class="dott">:</span>
+
+			<input placeholder="M" type="number" id="minute" class="inp2">
+
+		<span class="dott">:</span>
+
+			<input placeholder="S" type="number" id="seconds" class="inp2">
+
+<span class="dott">:</span>
+
+			<select id="session1" style="border:none;height:35px; font-size:18px;color:#500A0C; font-weight: bolder;background-color: #E79EA7; outline: none;border-radius: 5px;">
+				<option>AM</option>
+				<option>PM</option>
+			</select>
+ 
+
+		</div>
+
+
+		
+
+		<div>
+			<span id="ti1" class="dot"> 00:00:00 </span>
+
+			<div style="margin-top: 20px;">
+				<input id="myFile1" type="file" name="" style="margin-left:123px; color:#E79EA7;"> <br>
+
+				<button onclick="selectSong()" id="gres">SELECT</button>		
+			
+			
+			</div>
+
+		</div> <br>
+<div style="margin-top: 25px;">
+
+		<button onclick="setalarm()" id="btn1">SET</button>
+
+		<button id="btn2" onclick="stopAlarm()">STOP</button>
+
+		<button id="btn3" onclick="snoozeAlarm()">Zzz</button>
+
+	</div>
+
+
+</div> <br> <br>
+
+
+<script type="text/javascript">
+
+var today, h, m, s, session, time, currentTime, gee, File, result;
+
+function startTime(){
+   today = new Date();
+   h = today.getHours();
+   m = today.getMinutes();
+   s = today.getSeconds();
+   session = "AM";
+
+   if(h == 0){
+	 h == 12;
+	 session = "PM";
+	};
+ 
+
+	if(h > 12){
+	h = h - 12;
+	session = "PM"
+};
+
+   if(h < 10){
+  	h = "0" + h
+  };
+
+  if(m < 10){
+  	m = "0" + m
+  };
+
+  if(s < 10){
+  	s = "0" + s
+  };
+
+   time = h + ":" +  m + ":" +  s + "" + session;
+
+  document.getElementById("ti1").innerText = time;
+	
+  setTimeout(startTime, 1000);
+}
+   
+   
+ 
+function setalarm(){
+			var currentTime = hour.value + ":" + minute.value + ":" + seconds.value + "" + session1.value;
+					 if(currentTime == time){
+		 song.src=result;
+	}
+
+				
+				startTime();
+
+
+					
+				setInterval(setalarm, 1000);
+
+}
+    
+      
+      function stopAlarm(){ 
+      	song.src = "";
+
+}
+
+
+function  snoozeAlarm(){
+	minute.value = eval(parseInt(minute.value) + 2);
+	song.src = "";
+	
+}
+
+ function selectSong(){
+	var file = myFile1.value;
+	 result = file.slice(file.lastIndexOf('\\') + 1, file.length);
+	
+ 
+
+}
+
+
+      	
+
+</script>
+
+
+</body>
+<audio id="song" src="" autoplay="" loop="" style="display: none;"></audio>
+
+<span id="great">(c) DESIGNED BY GREAT</span>
+
+
+</html>
